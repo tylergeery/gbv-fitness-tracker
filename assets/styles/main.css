@@ -1,40 +1,68 @@
 /* Specific Styles for This App */
 /* Keep this stylesheet to a minimun */
 /* Please use skeleton as much as possible */
-.center { text-align: center; }
-.absolute { position: fixed; }
-.auto { margin: auto; }
-/*.mt25 { margin-top: 25px; }*/
 
+/* General Styles to be used all over */
+.center { text-align: center; }
+.fixed { position: fixed; }
+.auto { margin: auto; }
+.float-right { float: right; }
+
+.error {
+	background: #DCA7A3;
+	color: #D54737;
+	border: 2px solid #D54737;
+	border-radius: 10px;
+	padding: 10px;
+	clear:both;
+}
+
+
+/* Styles specific to the header */
 .logo-header {
-	width:100%;
+	width: 100%;
 	height: 65px;
 	background: white;
-	padding: 10px;
+	padding: 10px 0;
 	font-size:1.6em;
 	line-height: 100%;
 	z-index: 500000;
 }
 
+.header-anchor {
+	padding: 22px;
+	color: rgb(50,50,50);
+	font-size: 14px;
+	text-decoration: none;
+}
+
+.header-anchor:hover {
+	color: #33C3F0;
+}
+
 .logo-image {
 	height: 70px;
 	position:fixed;
-	top:10;
-	left:10;
+	top:10px;
+	left:20px;
 
 	-webkit-transition: all 0.5s;
 	transition: all 0.5s;
 }
-.logo-header:hover .logo-image {
+.logo-image:hover {
 	transform: rotate(360deg);
 }
 
+
+
+/* Styles specific to the home landing page */
 .main-landing {
 	position: fixed;
 	width: 100%;
 	min-height: 600px;
 	background-image: url('../images/space_landing.jpg');
 	background-size: cover;
+	z-index: 2;
 }
 
 .main-landing-overlay {
@@ -80,8 +108,10 @@
 }
 
 footer {
+	position: relative;
 	min-height:200px;
 	background: rgb(250, 250, 250);
 	padding-top: 50px;
 	border-top: 1px solid rgb(240,240,240);
+	z-index: 200000000;
 }

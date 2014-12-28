@@ -1,0 +1,32 @@
+<section class="container">
+	<h2 class="columns">User Login</h2>
+	<form method="POST" action="/register" id="register_form">
+	  {{#if flash}}<p class="error seven columns">{{flash}}</p>{{/if}}
+	  <div class="row">
+	    <div class="seven columns">
+	      <label for="username">Username</label>
+	      <input class="u-full-width" type="text" name="username" placeholder="username" id="username">
+	    </div>
+	  </div>
+	  <div class="row">
+	    <div class="seven columns">
+	      <label for="email">Email</label>
+	      <small>*Required to verify account*</small>
+	      <input class="u-full-width" type="email" name="email" placeholder="email" id="email">
+	    </div>
+	  </div>
+	  <div class="row">
+	  	<div class="seven columns">
+	      <label for="password">Password</label>
+	      <input class="u-full-width" type="password" name="password" placeholder="password" id="password">
+	    </div>
+	  </div>
+	  <div class="row">
+	  	<div class="seven columns">
+	      <label for="confirm-password">Confirm Password</label>
+	      <input class="u-full-width" type="password" name="confirm-password" placeholder="password" id="confirm-password">
+	    </div>
+	  </div>
+	  <input class="button-primary" type="submit" id="submit_register" value="Submit">
+	</form>
+</section>

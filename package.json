@@ -3,11 +3,16 @@
   "version": "0.0.0",
   "private": true,
   "dependencies": {
+    "bcryptjs": "^2.1.0",
+    "body-parser": "^1.10.0",
     "express": "~3.4.0",
-    "express3-handlebars": "0.4.x"
+    "express-session": "^1.9.3",
+    "express3-handlebars": "0.4.x",
+    "mongoose": "^3.8.21",
+    "passport": "^0.2.1",
+    "passport-strategy": "^1.0.0"
   },
   "devDependencies": {
-    "express-session": "^1.9.3",
     "grunt": "~0.4.1",
     "grunt-concurrent": "~0.3.0",
     "grunt-contrib-clean": "~0.5.0",
@@ -27,9 +32,6 @@
     "grunt-svgmin": "~0.2.0",
     "grunt-usemin": "~0.1.10",
     "load-grunt-tasks": "~0.1.0",
-    "mongoose": "^3.8.21",
-    "passport": "^0.2.1",
-    "passport-strategy": "^1.0.0",
     "time-grunt": "~0.1.1"
   },
   "engines": {

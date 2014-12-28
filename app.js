@@ -3,27 +3,21 @@
 /*
  * Express Dependencies
  */
-var express = require('express'),
+var hbs,
+    express = require('express'),
     passport = require('passport'),
+    bodyParser = require('body-parser'),
     app = express(),
-    port = 3000;
-
-/*
- * Use Handlebars for templating
- */
-var exphbs = require('express3-handlebars');
-var hbs;
-
-var authenticate = require('./routes/authenticate'),
-    mainHandler = require('./routes/main'),
-    adminHandler = require('./routes/admin');
+    port = 3000,
+    exphbs = require('express3-handlebars');
 
 app.configure(function() {
   // For gzip compression
   app.use(express.compress());
   app.use(express.static('public'));
   app.use(express.cookieParser());
-  app.use(express.bodyParser());
+  app.use(bodyParser.urlencoded({ extended: false }))
+  app.use(bodyParser.json())
   app.use(express.session({ secret: 'Travis doesnt help' }));
   app.use(passport.initialize());
   app.use(passport.session());
@@ -61,20 +55,27 @@ if (process.env.NODE_ENV === 'production') {
     // Locate the assets
     app.use(express.static(__dirname + '/assets'));
 
-    process.env.mongoURL = 'local';
+    process.env['MONGO_URL'] = 'mongodb://localhost/fitness-local';
 }
 
 // Set Handlebars
 app.set('view engine', 'handlebars');
 
 
+// Need route declarations instantiated here because they are dependent on above if/else
+var authenticate = require('./routes/authenticate'),
+    mainHandler = require('./routes/main'),
+    adminHandler = require('./routes/admin');
 
 /*
  * Routes
  */
 app.get('/', mainHandler.main);
 app.get('/login', mainHandler.login);
+app.get('/register', mainHandler.register);
+app.get('/users', mainHandler.users);
 app.post('/login', authenticate.login, mainHandler.loggingIn);
+app.post('/register', authenticate.register, mainHandler.loggingIn);
 
 /*
  * Admin Routes

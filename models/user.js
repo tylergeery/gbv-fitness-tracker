@@ -1,17 +1,20 @@
+'use strict';
+
 var mongoose = require('mongoose'),
     Schema = mongoose.Schema;
 
 var userSchema = new Schema({
   username: String,
   email: String,
-  password: String,
+  hash: String,
   bio: String,
   workouts: [String],
+  teams: [String],
   created_at: { type: Date, default: Date.now },
   updated_at: { type: Date, default: Date.now },
   meta: {
-    fans: Number,
-    followers:  Number
+    fans: {type: Number, default: 0},
+    followers: {type: Number, default: 0}
   }
 });
 
