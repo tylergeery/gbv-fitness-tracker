@@ -4,8 +4,6 @@ var mongoose = require('mongoose'),
 	BlogPosts = require('../models/blogPost'),
 	User = require('../models/user');
 
-mongoose.connect(process.env.MONGO_URL);
-
 module.exports = {
 	about: function(req, res, next) {
 		res.render('about');

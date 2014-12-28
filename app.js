@@ -5,6 +5,7 @@
  */
 var hbs,
     express = require('express'),
+    mongoose = require('mongoose'),
     passport = require('passport'),
     bodyParser = require('body-parser'),
     app = express(),
@@ -19,7 +20,7 @@ app.configure(function() {
   app.use(express.cookieParser());
   app.use(bodyParser.urlencoded({ extended: false }))
   app.use(bodyParser.json())
-  app.use(express.session({ secret: 'TravisDoesntHelp', maxAge: null }));
+  app.use(express.session({ secret: 'TravisDoesntHelp', cookie: {maxAge: 10000000} null }));
   app.use(passport.initialize());
   app.use(passport.session());
   app.use(app.router);
@@ -62,6 +63,9 @@ if (process.env.NODE_ENV === 'production') {
 // Set Handlebars
 app.set('view engine', 'handlebars');
 
+// Connect to Mongoose
+mongoose.connect(process.env.MONGO_URL);
+
 
 // Need route declarations instantiated here because they are dependent on above if/else
 var authenticate = require('./routes/authenticate'),
@@ -77,6 +81,7 @@ app.get('/about', mainHandler.about);
 app.get('/blog', mainHandler.blog);
 app.get('/login', mainHandler.login);
 app.get('/register', mainHandler.register);
+app.get('/user', authenticate.isLoggedIn, user.main);
 app.get('/users', authenticate.isLoggedIn, mainHandler.users);
 
 /*

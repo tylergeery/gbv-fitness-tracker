@@ -5,7 +5,7 @@ $('#submit_register').off('click').on('click', function() {
 		username = $('#username').val(),
 		email = $('#email').val(),
 		password = $('#password').val(),
-		confirmPassword = $('#confirm-password').val();
+		confirmPassword = $('#confirm_password').val();
 
 	$('.error').remove();
 

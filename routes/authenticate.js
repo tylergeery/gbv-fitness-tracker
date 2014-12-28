@@ -34,7 +34,7 @@ module.exports = {
   },
   isAdminLoggedIn : function(req, res, next) {
     // Check for session of Admin User
-    if(!!req.user) {
+    if(!!req.session.user.isAdmin) {
       next();
     } else {
       res.redirect('/admin/login');
@@ -70,11 +70,21 @@ module.exports = {
     res.redirect('/');
   },
   register: function(req, res, next) {
-    // Please put in some verifications for registration data
-      /* Make sure it is valid information
-       * Make sure the email/username does not already exist
-       * Make sure the password is encrypted
-       * Proceed to necessary post-registration step */
+    //TODO: enhance input verification
+    if(!req.body.username) {
+      req.session.flash = 'Please provide a username';
+      res.redirect('/register');
+    } else if(!req.body.email) {
+      req.session.flash = 'Please provide an email';
+      res.redirect('/register');
+    } else if(!req.body.password) {
+      req.session.flash = 'Please provide a password';
+      res.redirect('/register');
+    } else if(req.body.password !== req.body.confirm_password) {
+      req.session.flash = 'Password must match the confirm password';
+      res.redirect('/register');
+    }
+
     User.find({ $or : [ {username: req.body.username }, { email: req.body.email }]}).exec(function(err, user) {
       if(user.username === req.body.username) {
         req.session.flash = 'Username is already taken';
@@ -90,11 +100,8 @@ module.exports = {
           });
 
       user.save();
-      console.log('Registered User:', user);
       req.session.user = user;
+      next();
     });
-
-    user.save();
-    next();
   }
 }
