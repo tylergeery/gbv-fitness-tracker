@@ -24,3 +24,22 @@ $('#submit_register').off('click').on('click', function() {
 		return false;
 	}
 });
+
+$('#submit_login').off('click').on('click', function() {
+	var error,
+		username = $('#username').val(),
+		password = $('#password').val();
+
+	$('.error').remove();
+
+	if(!username) {
+		error = 'Please enter a username';
+	} else if(!password) {
+		error = 'Please enter a password';
+	}
+
+	if(!!error) {
+		$('#login_form').prepend('<p class="error seven columns">'+error+'</p>');
+		return false;
+	}
+});

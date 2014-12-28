@@ -10,6 +10,7 @@ var userSchema = new Schema({
   bio: String,
   workouts: [String],
   teams: [String],
+  isAdmin : {type: Number, default: 0},
   created_at: { type: Date, default: Date.now },
   updated_at: { type: Date, default: Date.now },
   meta: {

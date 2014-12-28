@@ -13,12 +13,13 @@ var hbs,
 
 app.configure(function() {
   // For gzip compression
+  app.use(express.logger('dev'));
   app.use(express.compress());
   app.use(express.static('public'));
   app.use(express.cookieParser());
   app.use(bodyParser.urlencoded({ extended: false }))
   app.use(bodyParser.json())
-  app.use(express.session({ secret: 'Travis doesnt help' }));
+  app.use(express.session({ secret: 'TravisDoesntHelp', maxAge: null }));
   app.use(passport.initialize());
   app.use(passport.session());
   app.use(app.router);
@@ -65,23 +66,44 @@ app.set('view engine', 'handlebars');
 // Need route declarations instantiated here because they are dependent on above if/else
 var authenticate = require('./routes/authenticate'),
     mainHandler = require('./routes/main'),
+    userHandler = require('./routes/user'),
     adminHandler = require('./routes/admin');
 
 /*
- * Routes
+ * Get Routes w/ Views
  */
 app.get('/', mainHandler.main);
+app.get('/about', mainHandler.about);
+app.get('/blog', mainHandler.blog);
 app.get('/login', mainHandler.login);
 app.get('/register', mainHandler.register);
-app.get('/users', mainHandler.users);
+app.get('/users', authenticate.isLoggedIn, mainHandler.users);
+
+/*
+ * Get Routes w/ Resources
+ */
+
+
+/*
+ * Post Routes
+ */
 app.post('/login', authenticate.login, mainHandler.loggingIn);
 app.post('/register', authenticate.register, mainHandler.loggingIn);
 
+
 /*
- * Admin Routes
+ * Admin Get Routes w/ Views
+ */
+app.get('/admin', authenticate.isAdminLoggedIn, adminHandler.main);
+
+/*
+ * Admin Get Routes w/ Resources
  */
 
-app.get('/admin', adminHandler.main);
+
+/*
+ * Admin Post Routes
+ */
 
 /*
  * Start it up

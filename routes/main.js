@@ -1,11 +1,22 @@
 'use strict';
 
 var mongoose = require('mongoose'),
+	BlogPosts = require('../models/blogPost'),
 	User = require('../models/user');
 
 mongoose.connect(process.env.MONGO_URL);
 
 module.exports = {
+	about: function(req, res, next) {
+		res.render('about');
+	},
+	blog: function(req, res, next) {
+		BlogPosts.find({}).sort({ created_at: -1}).exec(function(err, posts) {
+			res.render('blog', {
+				blogPosts : posts
+			});
+		});
+	},
 	main: function(req, res, next) {
 		res.render('index');
 	},
@@ -21,7 +32,10 @@ module.exports = {
 		if(!req.session.loginUrl) {
 			res.redirect('/');
 		} else {
-			res.redirect(req.session.loginUrl);
+			var loginUrl = req.session.loginUrl;
+
+			req.session.loginUrl = null;
+			res.redirect(loginUrl);
 		}
 	},
 	register: function(req, res, next) {

@@ -57,19 +57,6 @@ module.exports = function (grunt) {
             server: ['.tmp'],
         },
 
-        // Hint Config
-        jshint: {
-            options: {
-                jshintrc: '.jshintrc'
-            },
-            all: [
-                'Gruntfile.js',
-                'assets/scripts/**/*.js',
-                '!assets/scripts/vendor/*',
-                'test/spec/**/*.js'
-            ]
-        },
-
         // Sass Config
         sass: {
             options: {
@@ -254,7 +241,6 @@ module.exports = function (grunt) {
     // Register Tasks
     // Workon
     grunt.registerTask('workon', 'Start working on this project.', [
-        'jshint',
         'sass:dev',
         'express:dev',
         'open:site',
