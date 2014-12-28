@@ -1,0 +1,87 @@
+/* Specific Styles for This App */
+/* Keep this stylesheet to a minimun */
+/* Please use skeleton as much as possible */
+.center { text-align: center; }
+.absolute { position: fixed; }
+.auto { margin: auto; }
+/*.mt25 { margin-top: 25px; }*/
+
+.logo-header {
+	width:100%;
+	height: 65px;
+	background: white;
+	padding: 10px;
+	font-size:1.6em;
+	line-height: 100%;
+	z-index: 500000;
+}
+
+.logo-image {
+	height: 70px;
+	position:fixed;
+	top:10;
+	left:10;
+
+	-webkit-transition: all 0.5s;
+	transition: all 0.5s;
+}
+.logo-header:hover .logo-image {
+	transform: rotate(360deg);
+}
+
+.main-landing {
+	position: fixed;
+	width: 100%;
+	min-height: 600px;
+	background-image: url('../images/space_landing.jpg');
+	background-size: cover;
+}
+
+.main-landing-overlay {
+	position: absolute;
+	top: 0; left: 0;
+	width:100%;
+	min-height: 600px;
+	background-color: rgba(0,0,0,.6);
+	z-index:500;
+}
+
+.main-landing-container {
+	position:relative;
+	min-height: 600px;
+}
+
+.space-gray {
+	position: absolute;
+	bottom: 100px;
+	margin: auto;
+	padding:100px;
+	color: rgb(250,250,250);
+	z-index: 1000;
+}
+
+.landing-rocket {
+	position: absolute;
+	right: 100px; bottom: 0px;
+	height: 400px;
+	z-index: 10000;
+}
+
+.space-holder {
+	height:600px;
+}
+
+.popover {
+	position: absolute;
+	width: 100%;
+	background: white;
+	padding: 10px;
+	z-index: 200000000;
+}
+
+footer {
+	min-height:200px;
+	background: rgb(250, 250, 250);
+	padding-top: 50px;
+	border-top: 1px solid rgb(240,240,240);
+}
