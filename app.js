@@ -20,9 +20,13 @@ app.configure(function() {
   app.use(express.cookieParser());
   app.use(bodyParser.urlencoded({ extended: false }))
   app.use(bodyParser.json())
-  app.use(express.session({ secret: 'TravisDoesntHelp', cookie: {maxAge: 10000000} null }));
+  app.use(express.session({ secret: 'TravisDoesntHelp', cookie: {maxAge: 10000000} }));
   app.use(passport.initialize());
   app.use(passport.session());
+  app.use(function(req, res, next) {
+    res.locals.user = req.session.user;
+    next();
+  });
   app.use(app.router);
 });
 
@@ -80,8 +84,9 @@ app.get('/', mainHandler.main);
 app.get('/about', mainHandler.about);
 app.get('/blog', mainHandler.blog);
 app.get('/login', mainHandler.login);
+app.get('/logout', authenticate.logout);
 app.get('/register', mainHandler.register);
-app.get('/user', authenticate.isLoggedIn, user.main);
+app.get('/profile', authenticate.isLoggedIn, userHandler.main);
 app.get('/users', authenticate.isLoggedIn, mainHandler.users);
 
 /*

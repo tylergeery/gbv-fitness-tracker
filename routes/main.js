@@ -27,14 +27,10 @@ module.exports = {
 		});
 	},
 	loggingIn: function(req, res, next) {
-		if(!req.session.loginUrl) {
-			res.redirect('/');
-		} else {
-			var loginUrl = req.session.loginUrl;
+		var loginRedirect = req.session.loginRedirect ? req.session.loginRedirect : '/profile';
 
-			req.session.loginUrl = null;
-			res.redirect(loginUrl);
-		}
+		req.session.loginRedirect = null;
+		res.redirect(loginRedirect);
 	},
 	register: function(req, res, next) {
 		var flash = req.session.flash;

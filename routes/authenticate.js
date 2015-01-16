@@ -44,6 +44,7 @@ module.exports = {
     if(req.session.user) {
       next();
     } else {
+      req.session.loginRedirect = req.url;
       res.redirect('/login');
     }
   },

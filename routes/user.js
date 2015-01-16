@@ -5,7 +5,6 @@ var mongoose = require('mongoose'),
 
 module.exports = {
 	main: function(req, res, next) {
-		console.log('Hitting the index route');
-		res.render('main');
+		res.render('profile');
 	}
 }
